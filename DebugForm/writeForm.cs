@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TougouSystem
+namespace TougouSystem.DebugForm
 {
-    public partial class Form1 : Form
+    public partial class writeForm : Form
     {
-        public Form1()
+        public writeForm()
         {
             InitializeComponent();
         }
