@@ -58,12 +58,19 @@
     <Compile Include="DebugForm\debugForm01.Designer.cs">
       <DependentUpon>debugForm01.cs</DependentUpon>
     </Compile>
+    <Compile Include="DebugForm\detailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DebugForm\detailForm.Designer.cs">
+      <DependentUpon>detailForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DebugForm\readForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DebugForm\readForm.Designer.cs">
       <DependentUpon>readForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DebugForm\testPlan.cs" />
     <Compile Include="DebugForm\writeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +85,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DebugForm\debugForm01.resx">
       <DependentUpon>debugForm01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DebugForm\detailForm.resx">
+      <DependentUpon>detailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DebugForm\readForm.resx">
       <DependentUpon>readForm.cs</DependentUpon>
