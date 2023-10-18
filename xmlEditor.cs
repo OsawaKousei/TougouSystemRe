@@ -32,18 +32,6 @@ namespace TougouSystem
             }
         }
 
-        //xmlファイル新規作成
-        public void fileCreator(string path,string fileName)
-        {
-
-        }
-
-        //xmlファイル削除
-        public void fileDeleter(string path)
-        {
-
-        }
-
         //xmlファイルを読み込み
         public void xmlGetter(string path, string main)
         {
@@ -61,50 +49,88 @@ namespace TougouSystem
             return xdoc.ToString();
         }
 
-        //xmlファイル全体を上書き
-        public void xmlWriter(string contents)
+        //指定されたアイテムの最大値を求める
+        public int maxItem(string item)
         {
-
+            int max = (
+                from p in xml.Elements(mainCategory)
+                select int.Parse(p.Element(item).Value)).Max();
+            return max;
         }
 
-        //指定のアイテムが存在することを確認
-        public bool checkItem(string itemPath)
+        //数値順に並び替え
+        public int[] numericSort(string target, string option)
         {
-            return true;
-        }
+            int[] result = new int[maxItem("num")];
+            int i = 0;
 
-        //指定されたアイテムを数える
-        public int countItem(string item)
-        {
-            return 1;
-        }
+            IOrderedEnumerable<XElement> sortedRes = null;
 
-        //指定されたアイテムを読み込み
-        public void itemGetter(string path)
-        {
-            if (checkItem(path))
+            if (option == "descending")
             {
-
+                sortedRes = (
+                     from p in xml.Elements(mainCategory)
+                     orderby int.Parse(p.Element(target).Value) descending
+                     select p);
             }
+            else
+            {
+                sortedRes = (
+                    from p in xml.Elements(mainCategory)
+                    orderby int.Parse(p.Element(target).Value)
+                    select p);
+            }
+
+            foreach(var res in sortedRes)
+            {
+                result[i] = int.Parse(res.Element("num").Value);
+                i++;
+            }
+
+            return result;
+        }
+
+        //指定した要素値を持つものだけ抜き出し
+        public int[] extractiveSort(string targt, string selection)
+        {
+            int[] result = new int[maxItem("num")];
+            int i = 0;
+
+            var sortedRes = (
+                 from p in xml.Elements(mainCategory)
+                 where p.Element(targt).Value == selection
+                 select p);
+
+            foreach (var res in sortedRes)
+            {
+                result[i] = int.Parse(res.Element("num").Value);
+                i ++;
+            }
+
+            Array.Resize(ref result, i-1);
+            return result;
         }
 
         //指定されたアイテムを取得
-        public void itemWriter()
-        {
-
-        }
-
-        //指定されたアイテムを上書き
-        public string itemReader(string num, string contents) 
+        public string itemReader(string num, string target) 
         {
             var res = (
                  from p in xml.Elements(mainCategory)
                  where p.Element("num").Value == num
                  select p).Single();
 
-            MessageBox.Show(res.Element(contents).Value);
+            return res.Element(target).Value;
+        }
 
-            return res.Element(contents).Value;
+        //指定されたアイテムを上書き
+        public void itemWriter(string num, string target, string contents)
+        {
+            var res = (
+                from p in xml.Elements(mainCategory)
+                where p.Element("num").Value == num
+                select p).Single();
+
+            res.Element(target).Value = contents;
         }
     }
 }

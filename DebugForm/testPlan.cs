@@ -27,19 +27,19 @@ namespace TougouSystem.DebugForm
         private static string[] plnContents;
 
         private static int plnAmount;
-        private static int Num;
 
-        readForm readForm;
-        detailForm detailForm;
-        xmlEditor xmlEditor;
+        static readForm readForm;
+        static detailForm detailForm;
+        static xmlEditor xmlEditor;
 
         public void initializer()
         {
-            xmlEditor xmlEditor = new xmlEditor();
+            xmlEditor = new xmlEditor();
+            xmlEditor.xmlGetter(usingPath,"project");
             readForm = new readForm();
             detailForm = new detailForm();
 
-            plnAmount = xmlEditor.countItem("project");
+            plnAmount = xmlEditor.maxItem("num");
 
             showReadView();
         }

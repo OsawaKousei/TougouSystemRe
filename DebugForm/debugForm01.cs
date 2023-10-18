@@ -12,8 +12,6 @@ namespace TougouSystem.DebugForm
 {
     public partial class debugForm01 : Form
     {
-        readForm readForm = null;
-
         public debugForm01()
         {
             InitializeComponent();
@@ -26,8 +24,8 @@ namespace TougouSystem.DebugForm
 
         private void readButton_Click(object sender, EventArgs e)
         {
-            readForm = new readForm();
-            readForm.Show();
+            testPlan testPlan = new testPlan();
+            testPlan.initializer();
         }
     }
 }
