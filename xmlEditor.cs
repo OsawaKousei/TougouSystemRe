@@ -15,6 +15,7 @@ namespace TougouSystem
         private static XElement xml = null;
         private static XDocument xdoc = null;
         private static string mainCategory = null;
+        private static string mainNumber = null;
 
         //指定のファイルが存在することを確認
         private bool checkPath(string path)
@@ -33,13 +34,14 @@ namespace TougouSystem
         }
 
         //xmlファイルを読み込み
-        public void xmlGetter(string path, string main)
+        public void xmlGetter(string path, string main, string mainNum)
         {
             if (checkPath(path))
             {
                 xml = XElement.Load(path);
                 xdoc = XDocument.Load(path);
                 mainCategory = main;
+                mainNumber = mainNum;
             }
         }
 
@@ -61,7 +63,7 @@ namespace TougouSystem
         //数値順に並び替え
         public int[] numericSort(string target, string option)
         {
-            int[] result = new int[maxItem("num")];
+            int[] result = new int[maxItem(mainNumber)];
             int i = 0;
 
             IOrderedEnumerable<XElement> sortedRes = null;
@@ -83,7 +85,7 @@ namespace TougouSystem
 
             foreach(var res in sortedRes)
             {
-                result[i] = int.Parse(res.Element("num").Value);
+                result[i] = int.Parse(res.Element(mainNumber).Value);
                 i++;
             }
 
@@ -93,7 +95,7 @@ namespace TougouSystem
         //指定した要素値を持つものだけ抜き出し
         public int[] extractiveSort(string targt, string selection)
         {
-            int[] result = new int[maxItem("num")];
+            int[] result = new int[maxItem(mainNumber)];
             int i = 0;
 
             var sortedRes = (
@@ -103,7 +105,7 @@ namespace TougouSystem
 
             foreach (var res in sortedRes)
             {
-                result[i] = int.Parse(res.Element("num").Value);
+                result[i] = int.Parse(res.Element(mainNumber).Value);
                 i ++;
             }
 
@@ -116,7 +118,7 @@ namespace TougouSystem
         {
             var res = (
                  from p in xml.Elements(mainCategory)
-                 where p.Element("num").Value == num
+                 where p.Element(mainNumber).Value == num
                  select p).Single();
 
             return res.Element(target).Value;
@@ -126,9 +128,9 @@ namespace TougouSystem
         public void itemWriter(string num, string target, string contents)
         {
             var res = (
-                from p in xml.Elements(mainCategory)
-                where p.Element("num").Value == num
-                select p).Single();
+                 from p in xml.Elements(mainCategory)
+                 where p.Element(mainNumber).Value == num
+                 select p).Single();
 
             res.Element(target).Value = contents;
         }

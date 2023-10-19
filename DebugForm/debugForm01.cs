@@ -27,5 +27,10 @@ namespace TougouSystem.DebugForm
             testPlan testPlan = new testPlan();
             testPlan.initializer();
         }
+
+        private void debugForm01_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

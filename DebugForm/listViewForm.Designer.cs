@@ -1,6 +1,6 @@
 ﻿namespace TougouSystem.DebugForm
 {
-    partial class readForm
+    partial class listViewForm
     {
         /// <summary>
         /// Required designer variable.

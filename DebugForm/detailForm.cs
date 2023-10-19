@@ -24,7 +24,12 @@ namespace TougouSystem.DebugForm
 
         public void showDetail(string[] contentsList, string[] contnts)
         {
+            richTextBox1.ReadOnly = true;
 
+            for(int i = 0; i < contentsList.Length; i++)
+            {
+                richTextBox1.Text += contentsList[i] + "：" + contnts[i] + "\r\n";
+            }
         } 
     }
 }

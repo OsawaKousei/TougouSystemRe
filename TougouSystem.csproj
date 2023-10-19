@@ -52,6 +52,12 @@
     <Compile Include="center.Designer.cs">
       <DependentUpon>center.cs</DependentUpon>
     </Compile>
+    <Compile Include="DebugForm\textInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DebugForm\textInputForm.Designer.cs">
+      <DependentUpon>textInputForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DebugForm\debugForm01.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,11 +70,11 @@
     <Compile Include="DebugForm\detailForm.Designer.cs">
       <DependentUpon>detailForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DebugForm\readForm.cs">
+    <Compile Include="DebugForm\listViewForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DebugForm\readForm.Designer.cs">
-      <DependentUpon>readForm.cs</DependentUpon>
+    <Compile Include="DebugForm\listViewForm.Designer.cs">
+      <DependentUpon>listViewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DebugForm\testPlan.cs" />
     <Compile Include="DebugForm\writeForm.cs">
@@ -83,14 +89,17 @@
     <EmbeddedResource Include="center.resx">
       <DependentUpon>center.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DebugForm\textInputForm.resx">
+      <DependentUpon>textInputForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DebugForm\debugForm01.resx">
       <DependentUpon>debugForm01.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DebugForm\detailForm.resx">
       <DependentUpon>detailForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DebugForm\readForm.resx">
-      <DependentUpon>readForm.cs</DependentUpon>
+    <EmbeddedResource Include="DebugForm\listViewForm.resx">
+      <DependentUpon>listViewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

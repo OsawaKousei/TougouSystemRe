@@ -13,11 +13,14 @@ using System.Xml.Linq;
 
 namespace TougouSystem.DebugForm
 {
-    public partial class readForm : Form
+    public partial class listViewForm : Form
     { 
-        center center = new center();
+        //詳細選択イベント追加
+        public delegate void DetailEventHandler(object sender, EventArgs e);
+        public event DetailEventHandler DetailEvent;
 
-        public readForm()
+        public  string[] selectedItems = new string[0];
+        public listViewForm()
         {
             InitializeComponent();
         }
@@ -32,6 +35,7 @@ namespace TougouSystem.DebugForm
 
         }
 
+        //リストビューの初期設定
         public void makeList(string[] contentsList)
         {
             listView1.View = View.Details;
@@ -43,20 +47,17 @@ namespace TougouSystem.DebugForm
                 listView1.Columns.Add(content);
             }
 
-            //ListView1のすべての列を自動調節
             foreach (ColumnHeader ch in listView1.Columns)
             {
                 ch.Width = -2;
             }
 
-            //ポイントで選択できるようにする
             listView1.HoverSelection = true;
-            //ダブルクリックでアクティブにできるようにする
             listView1.Activation = ItemActivation.TwoClick;
-            //ItemActivateイベントハンドラの追加
             listView1.ItemActivate += new EventHandler(listView1_ItemActivate);
         }
 
+        //リストビューに内容を追加
         public void addList(string[] contents)
         {
             listView1.Items.Add(new ListViewItem(contents));
@@ -67,15 +68,20 @@ namespace TougouSystem.DebugForm
         {
             ListView lv = (ListView)sender;
 
-            // 選択項目があるかどうかを確認する
             if (listView1.SelectedItems.Count == 0)
             {
-                // 選択項目がないので処理をせず抜ける
                 return;
             }
 
-            // 選択項目を取得する
             ListViewItem itemx = listView1.SelectedItems[0];
+
+            Array.Resize(ref selectedItems, itemx.SubItems.Count);
+            for (int i=0; i < itemx.SubItems.Count; i++)
+            {
+                selectedItems[i] = itemx.SubItems[i].Text;
+            }
+
+            this.DetailEvent(this, new EventArgs());
         }
     }
 }

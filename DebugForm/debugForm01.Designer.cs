@@ -60,6 +60,7 @@
             this.Controls.Add(this.button1);
             this.Name = "debugForm01";
             this.Text = "debugForm01";
+            this.Load += new System.EventHandler(this.debugForm01_Load);
             this.ResumeLayout(false);
 
         }
